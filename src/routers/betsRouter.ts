@@ -1,7 +1,9 @@
 import { Router } from "express";
+import {validateSchemaMiddleware} from "@/middlewares/validateSchemaMiddleware";
+import betsSchema from "@/schemas/betsSchema";
 
 const route = Router()
 
-route.post("/",(req,res)=>res.send("post bets"))
+route.post("/",validateSchemaMiddleware(betsSchema),(req,res)=>res.send("post bets"))
 
 export default route

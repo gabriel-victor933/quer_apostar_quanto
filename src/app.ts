@@ -1,4 +1,5 @@
 import express, { Response, Request} from "express"
+import "express-async-errors"
 import httpStatus from "http-status";
 import gamesRouter from "./routers/gamesRouter"
 import participantsRouter from "./routers/participantsRouter" 
