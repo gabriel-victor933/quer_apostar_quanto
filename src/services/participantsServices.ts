@@ -5,6 +5,11 @@ async function createParticipant(body: participant){
     return await participantRepositories.createParticipant(body)
 }
 
+async function getParticipants(){
+    return await participantRepositories.getParticipants()
+}
+
 export const participantServices = {
-    createParticipant
+    createParticipant,
+    getParticipants
 }
