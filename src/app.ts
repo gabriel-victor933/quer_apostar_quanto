@@ -5,6 +5,10 @@ import gamesRouter from "./routers/gamesRouter"
 import participantsRouter from "./routers/participantsRouter" 
 import betsRouter from "./routers/betsRouter"
 import {errorsHandler} from "./middlewares/errorsHandler";
+import { connectDb } from "./config/database";
+
+connectDb()
+    .then(()=>{console.log("connected!")});
 
 const app = express()
 app.use(express.json())
