@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  postgres: 
+    image: postgres
+    container_name: quer_apostar_quanto_db
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=apostas_db 
