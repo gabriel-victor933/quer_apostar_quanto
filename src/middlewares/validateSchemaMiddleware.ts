@@ -2,11 +2,10 @@ import {Request,Response,NextFunction} from "express"
 import { ObjectSchema } from "joi"
 export function validateSchemaMiddleware(schema: ObjectSchema){
     return (req: Request,res: Response,next: NextFunction) =>{
-        const {error} = schema.validate(req.body,{abortEarly: false,convert: false})
+        const {error} = schema.validate(req.body,{abortEarly: false,convert: true})
         
         if(error){
-            console.log(error.message)
-            return res.status(400).send({type: "invalid body!",message: error.message.replace("\\"," ")})
+            return res.status(400).send({message: "invalid body!",description: error.message})
         }
         next()
     }
