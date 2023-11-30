@@ -11,9 +11,16 @@ function getGames(){
     return prisma.game.findMany()
 }
 
+function getGameByid(id: number){
+    return prisma.game.findFirst({
+        where: {id}
+    })
+}
+
 const gamesRepositories = {
     postGames,
-    getGames
+    getGames,
+    getGameByid
 }
 
 export default gamesRepositories

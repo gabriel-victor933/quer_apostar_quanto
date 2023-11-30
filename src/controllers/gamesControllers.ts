@@ -11,3 +11,8 @@ export async function getGames(req: Request, res: Response){
     const game = await gamesServices.getGames();
     res.status(httpStatus.CREATED).send(game)
 }
+
+export async function getGameByid(req: Request & {id: number}, res: Response){
+    const game = await gamesServices.getGameByid(req.id)
+    res.status(httpStatus.OK).send(game)
+}

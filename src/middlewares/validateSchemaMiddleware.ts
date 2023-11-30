@@ -27,6 +27,8 @@ function validateParams(schema: ObjectSchema){
         if(error){
             return res.status(400).send({message: "invalid URL",description: error.message})
         }
+        req["id"] = parseInt(req.params.id)
+
         next()
 }
 }

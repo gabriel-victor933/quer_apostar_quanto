@@ -9,9 +9,14 @@ async function getGames(){
     return await gamesRepositories.getGames()
 }
 
+async function getGameByid(id: number){
+    return await gamesRepositories.getGameByid(id)
+}
+
 const gamesServices = {
     postGames,
-    getGames
+    getGames,
+    getGameByid
 }
 
 export default gamesServices
