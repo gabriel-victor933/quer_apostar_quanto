@@ -6,6 +6,6 @@ import { createParticipant, getParticipants } from "@/controllers/participantsCo
 const route = Router()
 
 route.get("/",getParticipants)
-route.post("/",validateSchemaMiddleware(participantsSchema),createParticipant)
+route.post("/",validateSchemaMiddleware(participantsSchema,"body"),createParticipant)
 
 export default route

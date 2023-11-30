@@ -4,6 +4,6 @@ import betsSchema from "@/schemas/betsSchema";
 
 const route = Router()
 
-route.post("/",validateSchemaMiddleware(betsSchema),(req,res)=>res.send("post bets"))
+route.post("/",validateSchemaMiddleware(betsSchema,"body"),(req,res)=>res.send("post bets"))
 
 export default route
