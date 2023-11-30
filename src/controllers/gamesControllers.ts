@@ -6,3 +6,8 @@ export async function postGames(req: Request, res: Response){
     const game = await gamesServices.postGames(req.body);
     res.status(httpStatus.CREATED).send(game)
 }
+
+export async function getGames(req: Request, res: Response){
+    const game = await gamesServices.getGames();
+    res.status(httpStatus.CREATED).send(game)
+}

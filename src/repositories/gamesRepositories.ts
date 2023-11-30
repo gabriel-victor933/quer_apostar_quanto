@@ -7,8 +7,13 @@ function postGames(body: gameDto){
     })
 }
 
+function getGames(){
+    return prisma.game.findMany()
+}
+
 const gamesRepositories = {
-    postGames
+    postGames,
+    getGames
 }
 
 export default gamesRepositories
