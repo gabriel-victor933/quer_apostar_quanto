@@ -1,17 +1,24 @@
 import { gameDto } from "@/utils/types"
 import gamesRepositories from "@/repositories/gamesRepositories"
+import { notFoundException } from "@/errors/commonErrors"
 
 async function postGames(body: gameDto){
     return await gamesRepositories.postGames(body)
 }
 
 async function getGames(){
-    return await gamesRepositories.getGames()
+    const games = await gamesRepositories.getGames()
+    if(games.length == 0) throw notFoundException("Games Not Found!");
+    return games
 }
 
+
 async function getGameByid(id: number){
-    return await gamesRepositories.getGameByid(id)
+    const game = await gamesRepositories.getGameByid(id)
+    if(!game) throw notFoundException("Game Not Found!");
+    return game
 }
+
 
 const gamesServices = {
     postGames,

@@ -8,3 +8,12 @@ export function invalidBodyException(description?: string){
         description: description,
     }
 }
+
+export function notFoundException(description?: string){
+    return {
+        type: "application",
+        code: httpStatus.NOT_FOUND,
+        message: "Not Found!",
+        description: description,
+    }
+}

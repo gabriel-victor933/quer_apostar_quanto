@@ -1,6 +1,7 @@
-import { Request, Response } from "express"
+import { ApplicationErrors } from "@/utils/types"
+import { NextFunction, Request, Response } from "express"
 
-export function errorsHandler(err ,req: Request, res: Response){
+export async function errorsHandler(err: ApplicationErrors ,req: Request, res: Response, next: NextFunction){
     if(err?.type == "application" ) return res.status(err.code).send({message: err.message, description : err.description})
-    return res.status(500).send("exception handler")
+    next(err)
 }
