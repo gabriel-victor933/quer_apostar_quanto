@@ -8,6 +8,14 @@ export type gameDto = {
 	awayTeamName: string;
 }
 
+export type betsDto = { 
+	homeTeamScore: number;
+	awayTeamScore: number; 
+	amountBet: number; 
+	gameId: number; 
+	participantId: number;
+}
+
 export type ApplicationErrors = {
     type: "application",
     code: number,

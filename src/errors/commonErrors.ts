@@ -17,3 +17,21 @@ export function notFoundException(description?: string){
         description: description,
     }
 }
+
+export function insufficientFundsExceptions(description?: string){
+    return {
+        type: "application",
+        code: httpStatus.BAD_REQUEST,
+        message: "Insufficient Funds!",
+        description: description,
+    }
+}
+
+export function badRequestException(description?: string){
+    return {
+        type: "application",
+        code: httpStatus.BAD_REQUEST,
+        message: "Bad Request!",
+        description: description,
+    }
+}

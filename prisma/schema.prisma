@@ -42,7 +42,7 @@ model Bet {
   gameId Int 
   participant Participant @relation(fields: [participantId], references: [id])
   participantId Int
-  status Status
+  status Status @default(PENDING)
   amountWon Int?
 
   @@map("bets") 
