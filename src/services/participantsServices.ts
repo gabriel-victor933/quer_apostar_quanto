@@ -1,7 +1,7 @@
-import { participant } from "@/utils/types";
+import { participantDto } from "@/utils/types";
 import { participantRepositories } from "@/repositories/participantsRepositories";
 
-async function createParticipant(body: participant){
+async function createParticipant(body: participantDto){
     return await participantRepositories.createParticipant(body)
 }
 
