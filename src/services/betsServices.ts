@@ -1,5 +1,5 @@
-import betsRepositories from "@/repositories/betsRepositories";
-import { betsDto } from "@/utils/types";
+import betsRepositories from "../repositories/betsRepositories";
+import { betsDto } from "../utils/types";
 
 async function postBet(body: betsDto) {
     return await betsRepositories.postBet(body)

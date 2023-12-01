@@ -1,4 +1,4 @@
-import { finishGameDto } from "@/utils/types"
+import { finishGameDto } from "../utils/types"
 import Joi from "joi"
 
 const finishGameSchema = Joi.object<finishGameDto>({

@@ -1,6 +1,6 @@
-import { finishGameDto, gameDto, bet } from "@/utils/types"
-import gamesRepositories from "@/repositories/gamesRepositories"
-import { badRequestException, notFoundException } from "@/errors/commonErrors"
+import { finishGameDto, gameDto, bet } from "../utils/types"
+import gamesRepositories from "../repositories/gamesRepositories"
+import { badRequestException, notFoundException } from "../errors/commonErrors"
 
 const HOUSE_TAX = 0.3
 

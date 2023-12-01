@@ -1,6 +1,6 @@
-import { prisma } from "@/config/database";
-import { badRequestException, insufficientFundsExceptions, notFoundException } from "@/errors/commonErrors";
-import { betsDto } from "@/utils/types";
+import { prisma } from "../config/database";
+import { badRequestException, insufficientFundsExceptions, notFoundException } from "../errors/commonErrors";
+import { betsDto } from "../utils/types";
 
 function postBet(body: betsDto){
     return prisma.$transaction(async (tx) => {

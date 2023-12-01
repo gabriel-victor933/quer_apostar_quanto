@@ -1,6 +1,6 @@
-import { participantDto } from "@/utils/types";
-import { participantRepositories } from "@/repositories/participantsRepositories";
-import { notFoundException } from "@/errors/commonErrors";
+import { participantDto } from "../utils/types";
+import { participantRepositories } from "../repositories/participantsRepositories";
+import { notFoundException } from "../errors/commonErrors";
 
 async function createParticipant(body: participantDto){
     return await participantRepositories.createParticipant(body)

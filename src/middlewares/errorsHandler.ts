@@ -1,4 +1,4 @@
-import { ApplicationErrors } from "@/utils/types"
+import { ApplicationErrors } from "../utils/types"
 import { NextFunction, Request, Response } from "express"
 
 export async function errorsHandler(err: ApplicationErrors ,req: Request, res: Response, next: NextFunction){

@@ -1,4 +1,4 @@
-import betsServices from "@/services/betsServices"
+import betsServices from "../services/betsServices"
 import {Response, Request} from "express"
 import httpStatus from "http-status"
 

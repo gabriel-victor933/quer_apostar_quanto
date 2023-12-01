@@ -1,5 +1,5 @@
-import { prisma } from "@/config/database";
-import { participantDto } from "@/utils/types";
+import { prisma } from "../config/database";
+import { participantDto } from "../utils/types";
 
 function createParticipant(body: participantDto){
     return prisma.participant.create({

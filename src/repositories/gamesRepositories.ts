@@ -1,5 +1,5 @@
-import { prisma } from "@/config/database";
-import { bet, finishGameDto, gameDto } from "@/utils/types";
+import { prisma } from "../config/database";
+import { bet, finishGameDto, gameDto } from "../utils/types";
 
 function postGames(body: gameDto){
     return prisma.game.create({

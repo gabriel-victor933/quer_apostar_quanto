@@ -1,9 +1,9 @@
 import { Router } from "express";
-import {validateSchemaMiddleware} from "@/middlewares/validateSchemaMiddleware";
-import gamesSchema from "@/schemas/gamesSchema";
-import { postGames,getGames, getGameByid, finishGame } from "@/controllers/gamesControllers";
-import { idParamSchema } from "@/schemas/idParamSchema";
-import finishGameSchema from "@/schemas/finishGameSchema";
+import {validateSchemaMiddleware} from "../middlewares/validateSchemaMiddleware";
+import gamesSchema from "../schemas/gamesSchema";
+import { postGames,getGames, getGameByid, finishGame } from "../controllers/gamesControllers";
+import { idParamSchema } from "../schemas/idParamSchema";
+import finishGameSchema from "../schemas/finishGameSchema";
 
 const route = Router()
 

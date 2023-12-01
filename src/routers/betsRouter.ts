@@ -1,7 +1,7 @@
 import { Router } from "express";
-import {validateSchemaMiddleware} from "@/middlewares/validateSchemaMiddleware";
-import betsSchema from "@/schemas/betsSchema";
-import { postBet } from "@/controllers/betsControllers";
+import {validateSchemaMiddleware} from "../middlewares/validateSchemaMiddleware";
+import betsSchema from "../schemas/betsSchema";
+import { postBet } from "../controllers/betsControllers";
 
 const route = Router()
 
