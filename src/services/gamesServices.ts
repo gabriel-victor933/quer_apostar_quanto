@@ -10,7 +10,6 @@ async function postGames(body: gameDto){
 
 async function getGames(){
     const games = await gamesRepositories.getGames()
-    if(games.length == 0) throw notFoundException("Games Not Found!");
     return games
 }
 

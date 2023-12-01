@@ -1,6 +1,6 @@
 import { resetDb } from "../helpers/resetDb";
 import { api } from '../helpers/connectApi';
-import { createGameData } from "./games.factory";
+import { createGameData, insertGameInDb } from "./games.factory";
 import httpStatus from "http-status";
 
 
@@ -20,9 +20,9 @@ describe("route POST /games",()=>{
             updatedAt: expect.any(String),
             homeTeamName: expect.any(String),
             awayTeamName: expect.any(String),
-            homeTeamScore: expect.any(Number), // inicialmente 0
-            awayTeamScore: expect.any(Number), // inicialmente 0
-            isFinished: expect.any(Boolean), // inicialmente false
+            homeTeamScore: expect.any(Number), 
+            awayTeamScore: expect.any(Number), 
+            isFinished: expect.any(Boolean),
         }))
     })
 
@@ -36,5 +36,35 @@ describe("route POST /games",()=>{
         const result = await api.post("/games").send({awayTeamName: "Avai"})
 
         expect(result.statusCode).toBe(httpStatus.BAD_REQUEST)
+    })
+})
+
+describe("route GET /games", () => {
+
+    it("should return an array of games objects", async ()=>{
+        await insertGameInDb()
+        const result = await api.get("/games")
+
+        expect(result.statusCode).toBe(httpStatus.OK)
+        expect(result.body).toEqual(expect.arrayContaining([
+            expect.objectContaining({
+                id: expect.any(Number),
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                homeTeamName: expect.any(String),
+                awayTeamName: expect.any(String),
+                homeTeamScore: expect.any(Number), 
+                awayTeamScore: expect.any(Number), 
+                isFinished: expect.any(Boolean),
+            })
+        ]))
+    })
+
+    it("should return an empty object", async () => {
+        const result = await api.get("/games")
+
+        expect(result.statusCode).toBe(httpStatus.OK)
+        expect(result.body).toBeInstanceOf(Array)
+        expect(result.body).toHaveLength(0)
     })
 })

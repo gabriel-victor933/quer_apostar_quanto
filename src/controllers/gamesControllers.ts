@@ -9,7 +9,7 @@ export async function postGames(req: Request, res: Response){
 
 export async function getGames(req: Request, res: Response){
     const game = await gamesServices.getGames();
-    res.status(httpStatus.CREATED).send(game)
+    res.status(httpStatus.OK).send(game)
 }
 
 export async function getGameByid(req: Request & {id: number}, res: Response){

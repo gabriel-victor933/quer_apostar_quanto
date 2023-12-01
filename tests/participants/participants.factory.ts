@@ -15,5 +15,5 @@ export function createParticipantData(isBalanceValid = true){
 }
 
 export async function insertParticipantInDb(){
-    await prisma.participant.create({data: createParticipantData()})
+    return await prisma.participant.create({data: createParticipantData()})
 }
