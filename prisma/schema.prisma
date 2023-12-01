@@ -44,6 +44,8 @@ model Bet {
   participantId Int
   status Status @default(PENDING)
   amountWon Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("bets") 
 }

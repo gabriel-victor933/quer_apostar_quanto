@@ -1,6 +1,6 @@
-import { api } from '../helpers/connectApi';
+import { api } from '../games/helpers/connectApi';
 import { createParticipantData, insertParticipantInDb } from './participants.factory';
-import { resetDb } from '../helpers/resetDb';
+import { resetDb } from '../games/helpers/resetDb';
 import httpStatus from 'http-status';
 
 

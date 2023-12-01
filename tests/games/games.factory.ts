@@ -8,6 +8,6 @@ export function createGameData(){
     }
 }
 
-export async function insertGameInDb(){
-    return await prisma.game.create({data: createGameData()})
+export async function insertGameInDb(isFinished = false){
+    return await prisma.game.create({data: {...createGameData(), isFinished}})
 }

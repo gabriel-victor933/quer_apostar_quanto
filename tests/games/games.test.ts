@@ -1,5 +1,5 @@
-import { resetDb } from "../helpers/resetDb";
-import { api } from '../helpers/connectApi';
+import { resetDb } from "./helpers/resetDb";
+import { api } from './helpers/connectApi';
 import { createGameData, insertGameInDb } from "./games.factory";
 import httpStatus from "http-status";
 
