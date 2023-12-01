@@ -19,7 +19,13 @@ function postBet(body: betsDto){
             data: {balance: participant.balance - body.amountBet}
         })
         return await tx.bet.create({
-            data: body
+            data: {
+                homeTeamScore: typeof(body.homeTeamScore) == "number"? body.homeTeamScore : parseInt(body.homeTeamScore),
+                awayTeamScore: typeof(body.awayTeamScore) == "number"? body.awayTeamScore : parseInt(body.awayTeamScore),
+                amountBet: typeof(body.amountBet) == "number"? body.amountBet : parseInt(body.amountBet),
+                gameId: typeof(body.gameId) == "number"? body.gameId : parseInt(body.gameId),
+                participantId: typeof(body.participantId) == "number"? body.participantId : parseInt(body.participantId),
+            }
         })
     })
 }

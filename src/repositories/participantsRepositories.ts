@@ -3,7 +3,10 @@ import { participantDto } from "@/utils/types";
 
 function createParticipant(body: participantDto){
     return prisma.participant.create({
-        data: body
+        data: {
+            name: body.name,
+            balance: typeof(body.balance) == "number"? body.balance : parseInt(body.balance)
+        }
     })
 }
 
