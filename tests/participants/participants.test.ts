@@ -1,6 +1,6 @@
 import supertest from 'supertest';
 import app from '../../src/app';
-import { createParticipantData, resetDb } from './participants.factory';
+import { createParticipantData, insertParticipantInDb, resetDb } from './participants.factory';
 import httpStatus from 'http-status';
 
 const api = supertest(app);
@@ -39,5 +39,33 @@ describe("route POST /participants ", ()=>{
         const result = await api.post("/participants").send(createParticipantData(false))
         
         expect(result.statusCode).toBe(httpStatus.BAD_REQUEST)
+    })
+})
+
+describe("route GET /participants",()=>{
+
+    it("should return an array of participants objects", async () =>{
+        await insertParticipantInDb()
+        const result = await api.get("/participants")
+
+        expect(result.statusCode).toBe(httpStatus.OK)
+        expect(result.body).toEqual(expect.arrayContaining([
+            expect.objectContaining({
+                id: expect.any(Number),
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                name: expect.any(String),
+                balance: expect.any(Number), 
+            })
+        ]))
+    })
+
+    it("should return an empty array", async () =>{
+        const result = await api.get("/participants")
+
+        expect(result.statusCode).toBe(httpStatus.OK)
+        expect(result.body).toBeInstanceOf(Array)
+        expect(result.body).toHaveLength(0);
+        
     })
 })

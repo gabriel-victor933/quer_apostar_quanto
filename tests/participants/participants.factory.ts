@@ -19,3 +19,7 @@ export function createParticipantData(isBalanceValid = true){
         balance: faker.number.int({min: 1, max: 999})
     }
 }
+
+export async function insertParticipantInDb(){
+    await prisma.participant.create({data: createParticipantData()})
+}
