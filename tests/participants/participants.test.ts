@@ -1,16 +1,16 @@
-import supertest from 'supertest';
-import app from '../../src/app';
-import { createParticipantData, insertParticipantInDb, resetDb } from './participants.factory';
+import { api } from '../helpers/connectApi';
+import { createParticipantData, insertParticipantInDb } from './participants.factory';
+import { resetDb } from '../helpers/resetDb';
 import httpStatus from 'http-status';
 
-const api = supertest(app);
+
 
 beforeEach(async ()=>{
     await resetDb();
 })
 
 describe("route POST /participants ", ()=>{
-    it("Should return OK",async ()=>{
+    it("Should return CREATED",async ()=>{
         const result = await api.post("/participants").send(createParticipantData())
         
         expect(result.statusCode).toBe(httpStatus.CREATED)
