@@ -16,3 +16,8 @@ export async function getGameByid(req: Request & {id: number}, res: Response){
     const game = await gamesServices.getGameByid(req.id)
     res.status(httpStatus.OK).send(game)
 }
+
+export async function finishGame(req: Request & {id: number}, res: Response){
+    const game = await gamesServices.finishGame(req.body,req.id)
+    res.status(httpStatus.OK).send(game)
+}
