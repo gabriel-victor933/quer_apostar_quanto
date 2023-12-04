@@ -19,7 +19,7 @@ function getGameByid(id: number, includeBets = false ){
 }
 
 async function finishGame(body: finishGameDto,id: number, multiplier: number,bets: bet[]){
-    //atualizar placar do jogo
+
     const updateGame = prisma.game.update({
         where: {id: id},
         data: {
@@ -28,11 +28,11 @@ async function finishGame(body: finishGameDto,id: number, multiplier: number,bet
             isFinished: true
         }
     })
-    //atualizar o status das apostas e atualizar o amountWon
+
     const updatedBets = bets.map((bet) => {
         if(body.awayTeamScore == bet.awayTeamScore && body.homeTeamScore == bet.homeTeamScore){
             //WON
-            const amountWon = Math.floor(bet.amountBet*multiplier)
+            const amountWon = bet.amountBet*multiplier
             return prisma.bet.update({
                 where: {id: bet.id},
                 data: {
@@ -55,7 +55,6 @@ async function finishGame(body: finishGameDto,id: number, multiplier: number,bet
             }
         })
     })
-    //atualizar o saldo do jogador
 
     return prisma.$transaction([updateGame, ...updatedBets])
 }

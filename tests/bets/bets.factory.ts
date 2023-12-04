@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker"
+import { prisma } from "../../src/config/database"
 
 export function createBetData(gameId: number, participantId: number, balanceOfParticipant: number, haveEnoughFunds: boolean = true){
     
@@ -12,4 +13,16 @@ export function createBetData(gameId: number, participantId: number, balanceOfPa
         amountBet
     
     }
+}
+
+export async function insertBetInDb(gameId: number, participantId: number, balanceOfParticipant: number, haveEnoughFunds: boolean = true){
+    return await prisma.bet.create({
+        data: createBetData(gameId,participantId,balanceOfParticipant,haveEnoughFunds)
+    })
+}
+
+export async function getBetById(id: number){
+    return await prisma.bet.findFirst({
+        where: {id}
+    })
 }
