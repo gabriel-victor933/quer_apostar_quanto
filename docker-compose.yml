@@ -9,3 +9,13 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=apostas_db 
+
+  node_app:
+    container_name: node_app
+    build: . #Dockerfile do node se encontra na pasta atual
+    ports:
+      - 3000:${PORT}
+    depends_on:
+      - postgres # só sobe quando o postgres tiver no ar;
+    env_file:
+      - .env
