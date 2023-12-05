@@ -7,12 +7,15 @@ export async function postGames(req: Request, res: Response){
     res.status(httpStatus.CREATED).send(game)
 }
 
-export async function getGames(req: Request, res: Response){
+export async function getGames(req: Request & {query: {page?: string, finished?: string }}, res: Response){
     let finished 
     if(req.query.finished){
         finished = (req.query.finished == 'true' || req.query.finished == "True")
     }
-    const game = await gamesServices.getGames(finished);
+    
+    const page = (req.query.page || "1")
+    
+    const game = await gamesServices.getGames(finished,parseInt(page));
     res.status(httpStatus.OK).send(game)
 }
 
