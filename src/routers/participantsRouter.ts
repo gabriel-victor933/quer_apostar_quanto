@@ -4,8 +4,8 @@ import {sanatizeInputData} from "../middlewares/sanatizeInputData"
 import participantsSchema from "../schemas/participantsSchema";
 import getParticipantQuerySchema from "../schemas/getParticipantsQuerySchema";
 import { createParticipant, getParticipants, getParticipantsBet,postCredit } from "../controllers/participantsControllers";
-import { idParamSchema } from "src/schemas/idParamSchema";
-import postCreditSchema from "src/schemas/postCreditSchema";
+import { idParamSchema } from "../schemas/idParamSchema";
+import postCreditSchema from "../schemas/postCreditSchema";
 
 const route = Router()
 

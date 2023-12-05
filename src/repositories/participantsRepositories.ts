@@ -1,4 +1,4 @@
-import { notFoundException } from "src/errors/commonErrors";
+import { notFoundException } from "../errors/commonErrors";
 import { prisma } from "../config/database";
 import { participantDto } from "../utils/types";
 
