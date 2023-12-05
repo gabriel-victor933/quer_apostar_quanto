@@ -1,6 +1,6 @@
 import { insertParticipantInDb } from "../participants/participants.factory";
-import { api } from "../games/helpers/connectApi";
-import { resetDb } from "../games/helpers/resetDb";
+import { api } from "../helpers/connectApi";
+import { resetDb } from "../helpers/resetDb";
 import { insertGameInDb } from "../games/games.factory";
 import { createBetData } from "./bets.factory";
 import httpStatus from "http-status";

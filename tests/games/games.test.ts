@@ -1,5 +1,5 @@
-import { resetDb } from "./helpers/resetDb";
-import { api } from './helpers/connectApi';
+import { resetDb } from "../helpers/resetDb";
+import { api } from '../helpers/connectApi';
 import { createGameData, createGameResults, insertGameInDb } from "./games.factory";
 import httpStatus from "http-status";
 import { getBetById, insertBetInDb } from "../bets/bets.factory";
@@ -143,7 +143,7 @@ describe("route POST /games/:id/finish",()=>{
         const game = await insertGameInDb()
 
         const result = await api.post(`/games/${game.id+1}/finish`).send(createGameResults())
-
+        
         expect(result.statusCode).toBe(httpStatus.NOT_FOUND)
 
     })

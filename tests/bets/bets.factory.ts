@@ -3,7 +3,7 @@ import { prisma } from "../../src/config/database"
 
 export function createBetData(gameId: number, participantId: number, balanceOfParticipant: number, haveEnoughFunds: boolean = true){
     
-    const amountBet = haveEnoughFunds ? faker.number.int({min: 10, max: balanceOfParticipant}) : faker.number.int({min: balanceOfParticipant + 1, max: balanceOfParticipant + 1000})
+    const amountBet = haveEnoughFunds ? faker.number.int({min: 10, max: balanceOfParticipant-1}) : faker.number.int({min: balanceOfParticipant + 1, max: balanceOfParticipant + 1000})
 
     return {
         gameId,

@@ -8,8 +8,8 @@ async function postGames(body: gameDto){
     return await gamesRepositories.postGames(body)
 }
 
-async function getGames(finished?: boolean,page?: number){
-    const games = await gamesRepositories.getGames(finished,page)
+async function getGames(finished?: boolean,page?: number,homeTeamName?: string, awayTeamName?: string){
+    const games = await gamesRepositories.getGames(finished,page,homeTeamName,awayTeamName)
     return games
 }
 

@@ -6,10 +6,10 @@ function postBet(body: betsDto){
     return prisma.$transaction(async (tx) => {
         const participant = await tx.participant.findFirst({where: {id: body.participantId}})
         if(!participant) throw notFoundException("Participant Not Found!")
-
+        
         const game = await tx.game.findFirst({where: {id: body.gameId}})
         if(!game) throw notFoundException("Game Not Found!")
-
+    
         if(participant.balance < body.amountBet) throw insufficientFundsExceptions("Operation will not be complete because of insufficient funds!")
 
         if(game.isFinished) throw badRequestException("Game have already finished!")

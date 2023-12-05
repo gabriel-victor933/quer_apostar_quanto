@@ -6,9 +6,14 @@ export function sanatizeInputData(type: "body" | "params" | "query"){
 
         const keys = Object.keys(req[type])
         for(const key of keys){
-            req[type][key] = sanitizeHtml(req[type][key])
+            if(typeof( req[type][key]) == "string"){
+                req[type][key] = sanitizeHtml(req[type][key])
+            }
+            
             if(!req[type][key]) return res.status(400).send({message: "invalid body!",description: `Argument ${key} cannot be empty!`})            
         }
+
+        console.log("teste")
         return Next()
 
     }

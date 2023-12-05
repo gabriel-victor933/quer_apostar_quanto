@@ -7,10 +7,12 @@ function postGames(body: gameDto){
     })
 }
 
-function getGames(finished?: boolean,page?: number){
+function getGames(finished?: boolean,page?: number, homeTeamName?: string, awayTeamName?: string){
     return prisma.game.findMany({
         where: {
-            isFinished: finished
+            isFinished: finished,
+            homeTeamName: {equals: homeTeamName},
+            awayTeamName: {equals: awayTeamName}
         },
         take: 10,
         skip: 10*(page - 1)

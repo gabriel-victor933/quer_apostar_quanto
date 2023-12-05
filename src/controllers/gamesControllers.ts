@@ -7,15 +7,18 @@ export async function postGames(req: Request, res: Response){
     res.status(httpStatus.CREATED).send(game)
 }
 
-export async function getGames(req: Request & {query: {page?: string, finished?: string }}, res: Response){
+export async function getGames(req: Request & {query: {page?: string, finished?: string, homeTeamName?: string, awayTeamName?: string }}, res: Response){
     let finished 
     if(req.query.finished){
         finished = (req.query.finished == 'true' || req.query.finished == "True")
     }
     
     const page = (req.query.page || "1")
+
+    const homeTeamName = req.query.homeTeamName
+    const awayTeamName = req.query.awayTeamName
     
-    const game = await gamesServices.getGames(finished,parseInt(page));
+    const game = await gamesServices.getGames(finished,parseInt(page),homeTeamName,awayTeamName);
     res.status(httpStatus.OK).send(game)
 }
 
