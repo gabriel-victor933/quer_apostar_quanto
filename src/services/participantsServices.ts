@@ -5,8 +5,8 @@ async function createParticipant(body: participantDto){
     return await participantRepositories.createParticipant(body)
 }
 
-async function getParticipants(){
-    const participants = await participantRepositories.getParticipants()
+async function getParticipants(page?:number){
+    const participants = await participantRepositories.getParticipants(page)
 
     return participants
 }

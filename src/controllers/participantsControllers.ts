@@ -7,7 +7,8 @@ export async function createParticipant(req: Request, res: Response){
     res.status(httpStatus.CREATED).send(result)
 }
 
-export async function getParticipants(req: Request, res: Response){
-    const participants = await participantServices.getParticipants()
+export async function getParticipants(req: Request &  {query: {page?: string}}, res: Response){
+    const page = req.query.page || "1"
+    const participants = await participantServices.getParticipants(parseInt(page))
     res.status(httpStatus.OK).send(participants)
 }

@@ -10,8 +10,11 @@ function createParticipant(body: participantDto){
     })
 }
 
-function getParticipants(){
-    return prisma.participant.findMany();
+function getParticipants(page?:number){
+    return prisma.participant.findMany({
+        take: 10,
+        skip: 10*(page-1)
+    });
 }
 
 export  const participantRepositories = {
