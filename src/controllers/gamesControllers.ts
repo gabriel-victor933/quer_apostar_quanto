@@ -8,7 +8,11 @@ export async function postGames(req: Request, res: Response){
 }
 
 export async function getGames(req: Request, res: Response){
-    const game = await gamesServices.getGames();
+    let finished 
+    if(req.query.finished){
+        finished = (req.query.finished == 'true' || req.query.finished == "True")
+    }
+    const game = await gamesServices.getGames(finished);
     res.status(httpStatus.OK).send(game)
 }
 

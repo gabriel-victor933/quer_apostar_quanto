@@ -7,8 +7,12 @@ function postGames(body: gameDto){
     })
 }
 
-function getGames(){
-    return prisma.game.findMany()
+function getGames(finished?: boolean){
+    return prisma.game.findMany({
+        where: {
+            isFinished: finished
+        }
+    })
 }
 
 function getGameByid(id: number, includeBets = false ){
