@@ -57,7 +57,7 @@ describe("route GET /participants",()=>{
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
                 name: expect.any(String),
-                balance: expect.any(Number), 
+                balance: expect.any(Number),
             })
         ]))
     })
@@ -100,5 +100,49 @@ describe("route GET participants bets",()=>{
 
         expect(result.status).toBe(httpStatus.NOT_FOUND)
     })
+
+})
+
+describe("route POST credit",()=>{
+
+    it("should return OK",async ()=>{
+        const participant = await insertParticipantInDb()
+
+        const result = await api.post(`/participants/${participant.id}/credit`).send({
+            credit: Math.ceil(Math.random()*10000) + 1000,
+        })
+
+        expect(result.status).toBe(httpStatus.OK)
+        expect(result.body).toEqual(
+            expect.objectContaining({
+                id: expect.any(Number),
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                name: expect.any(String),
+                balance: expect.any(Number), 
+            })
+        )
+        
+    })
+
+    it("should return BAD REQUEST  if credit is less than 1000",async ()=>{
+        const participant = await insertParticipantInDb()
+
+        const result = await api.post(`/participants/${participant.id}/credit`).send({
+            credit: Math.ceil(Math.random()*1000) -1,
+        })
+
+        expect(result.status).toBe(httpStatus.BAD_REQUEST)
+    })
+
+    it("should return NOT FOUND if participant doens't exist",async ()=>{
+
+        const result = await api.post(`/participants/${Math.ceil(Math.random()*10)}/credit`).send({
+            credit: Math.ceil(Math.random()*10000) + 1000,
+        })
+
+        expect(result.status).toBe(httpStatus.NOT_FOUND)
+    })
+
 
 })
