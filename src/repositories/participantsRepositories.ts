@@ -17,7 +17,15 @@ function getParticipants(page?:number){
     });
 }
 
+function getParticipantsBet(id: number){
+    return prisma.participant.findFirst({
+        where: {id},
+        include: {bets: true}
+    })
+}
+
 export  const participantRepositories = {
     createParticipant,
-    getParticipants
+    getParticipants,
+    getParticipantsBet
 }

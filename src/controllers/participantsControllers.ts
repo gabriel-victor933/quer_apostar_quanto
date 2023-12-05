@@ -12,3 +12,8 @@ export async function getParticipants(req: Request &  {query: {page?: string}}, 
     const participants = await participantServices.getParticipants(parseInt(page))
     res.status(httpStatus.OK).send(participants)
 }
+
+export async function getParticipantsBet(req: Request &  {id?: number}, res: Response){
+    const bets = await participantServices.getParticipantsBet(req.id)
+    res.status(httpStatus.OK).send(bets)
+}
