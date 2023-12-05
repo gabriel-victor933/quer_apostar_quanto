@@ -1,0 +1,198 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Quer Apostar Quanto?",
+        "version":"1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "API"
+        }
+    ],
+    "paths": {
+        "/health": {
+            "get": {
+                "summary": "Verify if system is running!",
+                "tags": ["health"]
+            }
+        },
+        "/games": {
+            "post": {
+                "summary": "Post a game",
+                "tags": ["games"],
+                "requestBody": {
+                    "content":{
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/games"
+                        }
+                    }
+                }
+            }
+            },
+            "get": {
+                "summary": "get all games",
+                "tags": ["games"]
+            }
+        },
+        "/games/{gameId}":{
+            "get": {
+                "summary": "Post a game specific game",
+                "tags": ["games"]
+            }
+        },
+        "/games/{gameId}/finish":{
+            "post": {
+                "summary": "Post the final result of a game",
+                "tags": ["games"],
+                "requestBody": {
+                    "content":{
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/finishGame"
+                        }
+                    }
+                }
+            }
+            }
+        },
+        "/participants": {
+            "post": {
+                "summary": "Post a participant",
+                "tags": ["participants"],
+                "requestBody": {
+                    "content":{
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/participants"
+                        }
+                    }
+                }
+            }
+            },
+            "get": {
+                "summary": "get all participants",
+                "tags": ["participants"]
+            }
+        },
+        "/participants/{participantId}/bets":{
+            "get": {
+                "summary": "get all participant bets",
+                "tags": ["participants"]
+            }
+        },
+        "/participants/{participantId}/credit":{
+            "post": {
+                "summary": "Post credit  to a participant",
+                "tags": ["participants"],
+                "requestBody": {
+                    "content":{
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/credit"
+                        }
+                    }
+                }
+            }
+            }
+        },
+        "/bets": {
+            "post": {
+                "summary": "Post a bet",
+                "tags": ["bets"],
+                "requestBody": {
+                    "content":{
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/bet"
+                        }
+                    }
+                }
+            }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "games": {
+                "type": "object",
+                "properties": {
+                    "homeTeamName": {
+                        "type": "string",
+                        "required": "true"
+                    },
+                    "awayTeamName": {
+                        "type": "string",
+                        "required": "true"
+                    }
+
+            }
+            },
+            "finishGame": {
+                "type": "object",
+                "properties": {
+                    "homeTeamScore": {
+                        "type": "integer",
+                        "required": "true"
+                    },
+                    "awayTeamScore": {
+                        "type": "integer",
+                        "required": "true"
+                    }
+
+            }
+            },
+            "participants": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "required": "true"
+                    },
+                    "balance": {
+                        "type": "integer",
+                        "required": "true"
+                    }
+
+            }
+            },
+            "credit": {
+                "type": "object",
+                "properties": {
+                    "credit": {
+                        "type": "integer",
+                        "formet":"int64",
+                        "required": "true"
+                    }
+            }
+            },
+            "bet": {
+                "type": "object",
+                "properties": {
+                    "homeTeamScore": {
+                        "type": "integer",
+                        "required": "true"
+                    },
+                    "awayTeamScore": {
+                        "type": "integer",
+                        "required": "true"
+                    },
+                    "amountBet": {
+                        "type": "integer",
+                        "required": "true"
+                    },
+                    "gameId": {
+                        "type": "integer",
+                        "required": "true"
+                    },
+                    "participantId": {
+                        "type": "integer",
+                        "required": "true"
+                    }
+            }
+            }
+        }
+    }
+}
+
