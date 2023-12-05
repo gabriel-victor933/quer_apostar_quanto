@@ -1,3 +1,4 @@
+import { notFoundException } from "src/errors/commonErrors";
 import { prisma } from "../config/database";
 import { participantDto } from "../utils/types";
 
@@ -24,8 +25,24 @@ function getParticipantsBet(id: number){
     })
 }
 
+function postCredit(id: number,credit: number){
+    return prisma.$transaction(async (tx)=> {
+
+        const participant = await tx.participant.findUnique({where: {id}})
+
+        if(!participant) throw notFoundException("Participant not Found check the id!")
+
+        return tx.participant.update({
+            where: {id},
+            data: {balance: {increment: credit}}
+        })
+    })
+
+    
+}
 export  const participantRepositories = {
     createParticipant,
     getParticipants,
-    getParticipantsBet
+    getParticipantsBet,
+    postCredit
 }

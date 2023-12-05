@@ -17,3 +17,9 @@ export async function getParticipantsBet(req: Request &  {id?: number}, res: Res
     const bets = await participantServices.getParticipantsBet(req.id)
     res.status(httpStatus.OK).send(bets)
 }
+
+export async function postCredit(req: Request &  {id?: number} & {body: {credit: number}}, res: Response){
+    const credit = parseInt(req.body.credit)
+    const result = await participantServices.postCredit(req.id,credit)
+    res.status(httpStatus.ACCEPTED).send(result)
+}   

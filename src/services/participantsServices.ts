@@ -17,8 +17,15 @@ async function getParticipantsBet(id: number) {
     return participant.bets
 }
 
+async function postCredit(id: number, credit: number){
+    const participant = await participantRepositories.postCredit(id,credit)
+    if(!participant) throw notFoundException()
+    return participant
+}
+
 export const participantServices = {
     createParticipant,
     getParticipants,
-    getParticipantsBet
+    getParticipantsBet,
+    postCredit
 }
