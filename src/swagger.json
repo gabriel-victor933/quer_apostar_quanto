@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Quer Apostar Quanto?",
-        "version":"1.0.0"
+        "version": "1.0.0"
     },
     "servers": [
         {
@@ -14,185 +14,424 @@
         "/health": {
             "get": {
                 "summary": "Verify if system is running!",
-                "tags": ["health"]
+                "tags": [
+                    "health"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "application is running!"
+                    }
+                }
             }
         },
         "/games": {
             "post": {
                 "summary": "Post a game",
-                "tags": ["games"],
+                "tags": [
+                    "games"
+                ],
                 "requestBody": {
-                    "content":{
-                    "application/json": {
-                        "schema": {
-                            "$ref": "#/components/schemas/games"
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/games"
+                            },
+                            "examples": {
+                                "games": {
+                                    "value": {
+                                        "homeTeamName": "Corinthians",
+                                        "awayTeamName": "São Paulo"
+                                    }
+                                }
+                            }
                         }
                     }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Invalid Body"
+                    },
+                    "201": {
+                        "description": "game created"
+                    }
                 }
-            }
             },
             "get": {
                 "summary": "get all games",
-                "tags": ["games"]
-            }
-        },
-        "/games/{gameId}":{
-            "get": {
-                "summary": "Post a game specific game",
-                "tags": ["games"]
-            }
-        },
-        "/games/{gameId}/finish":{
-            "post": {
-                "summary": "Post the final result of a game",
-                "tags": ["games"],
-                "requestBody": {
-                    "content":{
-                    "application/json": {
+                "tags": [
+                    "games"
+                ],
+                "parameters":[
+                    {
+                        "in": "query",
+                        "name": "finished",
+                        "description": "Indicate if game is finished",
+                        "required": false,
                         "schema": {
-                            "$ref": "#/components/schemas/finishGame"
+                            "type": "boolean"
                         }
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "description": "Indicate the page to search",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "homeTeamName",
+                        "description": "Name of the Home team to search",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "awayTeamName",
+                        "description": "Name of the away team to search",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get all games"
                     }
                 }
             }
+        },
+        "/games/{gameId}": {
+            "get": {
+                "summary": "Post a game specific game",
+                "tags": [
+                    "games"
+                ],
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "gameId",
+                        "description": "Game ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get specific game"
+                    },
+                    "400": {
+                        "description": "Invalid URL"
+                    },
+                    "404": {
+                        "description": "Game not found"
+                    }
+                }
+            }
+        },
+        "/games/{gameId}/finish": {
+            "post": {
+                "summary": "Post the final result of a game",
+                "tags": [
+                    "games"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/finishGame"
+                            },
+                            "examples": {
+                                "finishGame": {
+                                    "value": {
+                                        "homeTeamScore": 1,
+                                        "awayTeamScore": 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "gameId",
+                        "description": "Game ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get specific game"
+                    },
+                    "400": {
+                        "description": "Bad request invalid request body or URL"
+                    },
+                    "404": {
+                        "description": "Game not found"
+                    }
+                }
             }
         },
         "/participants": {
             "post": {
                 "summary": "Post a participant",
-                "tags": ["participants"],
+                "tags": [
+                    "participants"
+                ],
                 "requestBody": {
-                    "content":{
-                    "application/json": {
-                        "schema": {
-                            "$ref": "#/components/schemas/participants"
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/participants"
+                            },
+                            "examples": {
+                                "participants": {
+                                    "value": {
+                                        "name": "Vitor",
+                                        "balance": 1500
+                                    }
+                                }
+                            }
                         }
                     }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Participant Created"
+                    },
+                    "400": {
+                        "description": "Invalid Body"
+                    }
                 }
-            }
             },
             "get": {
                 "summary": "get all participants",
-                "tags": ["participants"]
-            }
-        },
-        "/participants/{participantId}/bets":{
-            "get": {
-                "summary": "get all participant bets",
-                "tags": ["participants"]
-            }
-        },
-        "/participants/{participantId}/credit":{
-            "post": {
-                "summary": "Post credit  to a participant",
-                "tags": ["participants"],
-                "requestBody": {
-                    "content":{
-                    "application/json": {
+                "tags": [
+                    "participants"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "description": "Indicate the page to search",
+                        "required": false,
                         "schema": {
-                            "$ref": "#/components/schemas/credit"
+                            "type": "integer"
                         }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get all games"
                     }
                 }
             }
+        },
+        "/participants/{participantId}/bets": {
+            "get": {
+                "summary": "get all participant bets",
+                "tags": [
+                    "participants"
+                ],
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "participantId",
+                        "description": "Participant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get participants bets"
+                    },
+                    "400": {
+                        "description": "invalid URL"
+                    },
+                    "404": {
+                        "description": "Participant Not Found"
+                    }
+                }
+            }
+        },
+        "/participants/{participantId}/credit": {
+            "post": {
+                "summary": "Post credit  to a participant",
+                "tags": [
+                    "participants"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/credit"
+                            },
+                            "examples": {
+                                "credit": {
+                                    "value": {
+                                        "credit": 1000
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "participantId",
+                        "description": "Participant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Insert Credit"
+                    },
+                    "400": {
+                        "description": "Bad request invalid request body or URL"
+                    },
+                    "404": {
+                        "description": "Participant not found"
+                    }
+                }
             }
         },
         "/bets": {
             "post": {
                 "summary": "Post a bet",
-                "tags": ["bets"],
+                "tags": [
+                    "bets"
+                ],
                 "requestBody": {
-                    "content":{
-                    "application/json": {
-                        "schema": {
-                            "$ref": "#/components/schemas/bet"
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/bet"
+                            },
+                            "examples": {
+                                "bets": {
+                                    "value": {
+                                        "homeTeamScore": 0,
+                                        "awayTeamScore": 0,
+                                        "amountBet": 1000,
+                                        "gameId": 2,
+                                        "participantId": 3
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Bet createds"
+                    },
+                    "400": {
+                        "description": "Bad request invalid request body"
+                    },
+                    "404": {
+                        "description": "Participant or Game not found"
+                    }
+                }
+            },
+            "components": {
+                "schemas": {
+                    "games": {
+                        "type": "object",
+                        "properties": {
+                            "homeTeamName": {
+                                "type": "string",
+                                "required": "true"
+                            },
+                            "awayTeamName": {
+                                "type": "string",
+                                "required": "true"
+                            }
+                        }
+                    },
+                    "finishGame": {
+                        "type": "object",
+                        "properties": {
+                            "homeTeamScore": {
+                                "type": "integer",
+                                "required": "true"
+                            },
+                            "awayTeamScore": {
+                                "type": "integer",
+                                "required": "true"
+                            }
+                        }
+                    },
+                    "participants": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "required": "true"
+                            },
+                            "balance": {
+                                "type": "integer",
+                                "required": "true",
+                                "description": "Must be greater than 1000"
+                            }
+                        }
+                    },
+                    "credit": {
+                        "type": "object",
+                        "properties": {
+                            "credit": {
+                                "type": "integer",
+                                "formet": "int64",
+                                "required": "true"
+                            }
+                        }
+                    },
+                    "bet": {
+                        "type": "object",
+                        "properties": {
+                            "homeTeamScore": {
+                                "type": "integer",
+                                "required": "true"
+                            },
+                            "awayTeamScore": {
+                                "type": "integer",
+                                "required": "true"
+                            },
+                            "amountBet": {
+                                "type": "integer",
+                                "required": "true"
+                            },
+                            "gameId": {
+                                "type": "integer",
+                                "required": "true"
+                            },
+                            "participantId": {
+                                "type": "integer",
+                                "required": "true"
+                            }
                         }
                     }
                 }
             }
-            }
-        }
-    },
-    "components": {
-        "schemas": {
-            "games": {
-                "type": "object",
-                "properties": {
-                    "homeTeamName": {
-                        "type": "string",
-                        "required": "true"
-                    },
-                    "awayTeamName": {
-                        "type": "string",
-                        "required": "true"
-                    }
-
-            }
-            },
-            "finishGame": {
-                "type": "object",
-                "properties": {
-                    "homeTeamScore": {
-                        "type": "integer",
-                        "required": "true"
-                    },
-                    "awayTeamScore": {
-                        "type": "integer",
-                        "required": "true"
-                    }
-
-            }
-            },
-            "participants": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "required": "true"
-                    },
-                    "balance": {
-                        "type": "integer",
-                        "required": "true"
-                    }
-
-            }
-            },
-            "credit": {
-                "type": "object",
-                "properties": {
-                    "credit": {
-                        "type": "integer",
-                        "formet":"int64",
-                        "required": "true"
-                    }
-            }
-            },
-            "bet": {
-                "type": "object",
-                "properties": {
-                    "homeTeamScore": {
-                        "type": "integer",
-                        "required": "true"
-                    },
-                    "awayTeamScore": {
-                        "type": "integer",
-                        "required": "true"
-                    },
-                    "amountBet": {
-                        "type": "integer",
-                        "required": "true"
-                    },
-                    "gameId": {
-                        "type": "integer",
-                        "required": "true"
-                    },
-                    "participantId": {
-                        "type": "integer",
-                        "required": "true"
-                    }
-            }
-            }
         }
     }
 }
-
